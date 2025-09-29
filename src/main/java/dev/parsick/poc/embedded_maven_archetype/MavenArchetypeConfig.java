@@ -18,24 +18,25 @@ import java.util.List;
 public class MavenArchetypeConfig {
 
     @Bean
-    RepositorySystem repositorySystem() {
-        ContextOverrides contextOverrides = ContextOverrides.create().withUserSettings(true).build();
-        Context context = Runtimes.INSTANCE.getRuntime().create(contextOverrides);
+    RepositorySystem repositorySystem(Context context) {
         return context.repositorySystem();
     }
 
     @Bean
-    RepositorySystemSession repositorySystemSession() {
-        ContextOverrides contextOverrides = ContextOverrides.create().withUserSettings(true).build();
-        Context context = Runtimes.INSTANCE.getRuntime().create(contextOverrides);
+    RepositorySystemSession repositorySystemSession(Context context) {
         return context.repositorySystemSession();
     }
 
     @Bean
-    List<RemoteRepository> remoteRepositories() {
-        ContextOverrides contextOverrides = ContextOverrides.create().withUserSettings(true).build();
-        Context context = Runtimes.INSTANCE.getRuntime().create(contextOverrides);
+    List<RemoteRepository> remoteRepositories(Context context) {
+
         return context.remoteRepositories();
+    }
+
+    @Bean
+    Context mavenContext() {
+        ContextOverrides contextOverrides = ContextOverrides.create().withUserSettings(true).build();
+        return Runtimes.INSTANCE.getRuntime().create(contextOverrides);
     }
 
 
